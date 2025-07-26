@@ -19,6 +19,5 @@ app.use('/users', router)
 
 app.use(errorHandler); 
 app.listen(PORT, ()=>{
-    console.log(`Server is running at ${PORT}`);
-    
+    console.log(`Server is running at ${PORT}`);   
 })
