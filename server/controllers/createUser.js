@@ -17,6 +17,7 @@ const createUser = asyncHandler(async (req, res)=>{
       const user = await User.create({name, email, password}); 
 
       res.status(201).json({
+         success: true,
         message: "User created successfully", 
         user
       })
