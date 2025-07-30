@@ -21,30 +21,24 @@ const userSchema = new mongoose.Schema({
         minlength: [6, "Password must be at least 6 Characters"]
         
     },
-    otp: {
-        type: String
-    }, 
-    otpExpiry:{
-        type: Date
-    }, 
     isVerified: {
         type: Boolean, 
         default: false
     }
 }, {timestamps: true} ); 
 
-userSchema.pre('save', async function (next) {
-    // Only hash if password was modified (not during update)
-    if (!this.isModified("password")) {
-        return next(); 
-    }
-    try {
-        this.password = await bcrypt.hash(this.password, 10); 
-        next(); 
-    } catch (error) {
-        return next(error); 
-    }
-})
+// userSchema.pre('save', async function (next) {
+//     // Only hash if password was modified (not during update)
+//     if (!this.isModified("password")) {
+//         return next(); 
+//     }
+//     try {
+//         this.password = await bcrypt.hash(this.password, 10); 
+//         next(); 
+//     } catch (error) {
+//         return next(error); 
+//     }
+// })
 
 const User = mongoose.model('User', userSchema); 
 
