@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const OTPModel = require('../models/OTPModel');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const generateJWT = require('../utils/generateJWT');
 const verifyLoginOtp = asyncHandler(async (req, res) => {
     const { email, otp } = req.body;
     if (!email || !otp) {
@@ -29,9 +30,11 @@ const verifyLoginOtp = asyncHandler(async (req, res) => {
         throw new Error("User not Found");
     }
     await OTPModel.deleteOne({email}); 
+    const token = generateJWT(user._id); 
     res.status(200).json({
         success: true, 
         message: "Login successfull", 
+        token, 
         user
     })
 })
