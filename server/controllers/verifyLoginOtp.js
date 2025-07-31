@@ -30,11 +30,10 @@ const verifyLoginOtp = asyncHandler(async (req, res) => {
         throw new Error("User not Found");
     }
     await OTPModel.deleteOne({email}); 
-    const token = generateJWT(user._id); 
+     generateJWT(user._id); 
     res.status(200).json({
         success: true, 
-        message: "Login successfull", 
-        token, 
+        message: "Login successfull",  
         user
     })
 })
